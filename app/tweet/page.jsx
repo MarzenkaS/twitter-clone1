@@ -11,7 +11,18 @@ export default async function TweetPage() {
 
   return (
     <main>
-      <h1>📝 Tweets</h1>
+      <h1
+        className="tweets-title"
+        style={{
+          textAlign: "center",
+          width: "100%",
+          margin: "0 auto",
+          fontSize: "3rem",
+          fontWeight: 800,
+        }}
+      >
+        📝 Latest Tweets
+      </h1>
       {Array.isArray(tweets?.posts)
         ? tweets.posts.map((tweet) => {
             const id = tweet?.id ?? tweet?.postId ?? tweet?.userId;

@@ -48,7 +48,7 @@ export default function TweetDetailClient() {
     return (
       <main>
         <h1>Tweet not found</h1>
-        <p>Wybrany tweet nie istnieje lub wystąpił błąd podczas pobierania.</p>
+        <p>Tweet doesn't exist.</p>
         <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
           ← Back to Feed
         </a>
@@ -64,14 +64,21 @@ export default function TweetDetailClient() {
   const tags = Array.isArray(tweet.tags) ? tweet.tags.join(", ") : "";
 
   return (
-    <main>
-      <h1>{tweet.title ?? "(no title)"}</h1>
-      {tweet.body && <p>{tweet.body}</p>}
-      <p>
-        👍 {likes} | 👎 {dislikes}
-      </p>
-      {tags && <p>Tags: {tags}</p>}
-      <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
+    <main className="tweet-detail">
+      <header className="tweet-header">
+        <h1 className="tweet-title">{tweet.title ?? "(no title)"}</h1>
+      </header>
+
+      {tweet.body && <p className="tweet-body">{tweet.body}</p>}
+
+      <div className="tweet-meta">
+        <span className="tweet-likes">👍 {likes}</span>
+        <span className="tweet-dislikes"> | 👎 {dislikes}</span>
+      </div>
+
+      {tags && <p className="tweet-tags">Tags: {tags}</p>}
+
+      <a className="back-link" href="/">
         ← Back to Feed
       </a>
     </main>
