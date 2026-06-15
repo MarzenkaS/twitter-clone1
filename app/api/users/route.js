@@ -1,5 +1,5 @@
-import { connectDB } from "@/app/api/lib/mongoose";
-import User from "@/app/api/lib/models/User";
+import { connectDB } from "@/app/lib/mongoose";
+import User from "@/app/lib/models/User";
 
 export async function GET() {
     await connectDB();
