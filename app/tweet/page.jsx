@@ -12,11 +12,19 @@ export default async function TweetPage() {
   return (
     <main>
       <h1>📝 Tweets</h1>
-      {tweets.posts.map((tweet) => (
-        <Link key={tweet.id} href={`/tweet/${tweet.id}`}>
-          <TweetCard tweet={tweet} />
-        </Link>
-      ))}
+      {Array.isArray(tweets?.posts)
+        ? tweets.posts.map((tweet) => {
+            const id = tweet?.id ?? tweet?.postId ?? tweet?.userId;
+            if (!id) {
+              return <TweetCard key={Math.random()} tweet={tweet} />;
+            }
+            return (
+              <Link key={id} href={`/tweet/${String(id)}`}>
+                <TweetCard tweet={tweet} />
+              </Link>
+            );
+          })
+        : null}
     </main>
   );
 }
