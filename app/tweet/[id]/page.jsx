@@ -36,6 +36,7 @@ export default async function TweetDetail({ params }) {
     tweet.title ?? tweet.name ?? tweet.heading ?? tweet.subject ?? "";
   const body =
     tweet.body ?? tweet.content ?? tweet.text ?? tweet.description ?? "";
+  const showDebug = !title && !body;
 
   return (
     <main>
@@ -45,6 +46,20 @@ export default async function TweetDetail({ params }) {
         👍 {likes} | 👎 {dislikes}
       </p>
       {tags && <p>Tags: {tags}</p>}
+      {showDebug && (
+        <section style={{ marginTop: 16 }}>
+          <h2>Raw response (debug)</h2>
+          <pre
+            style={{
+              whiteSpace: "pre-wrap",
+              background: "#f7f7f7",
+              padding: 8,
+            }}
+          >
+            {JSON.stringify(tweet, null, 2)}
+          </pre>
+        </section>
+      )}
       <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
         ← Back to Feed
       </a>
