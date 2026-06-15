@@ -7,17 +7,21 @@ async function getTweet(id) {
 }
 
 export default async function TweetDetail({ params }) {
-  const { id } = await params;
+  const { id } = params;
   const tweet = await getTweet(id);
+
+  const likes = tweet.reactions?.likes ?? 0;
+  const dislikes = tweet.reactions?.dislikes ?? 0;
+  const tags = Array.isArray(tweet.tags) ? tweet.tags.join(", ") : "";
 
   return (
     <main>
       <h1>{tweet.title}</h1>
       <p>{tweet.body}</p>
       <p>
-        👍 {tweet.reactions.likes} | 👎 {tweet.reactions.dislikes}
+        👍 {likes} | 👎 {dislikes}
       </p>
-      <p>Tags: {tweet.tags.join(", ")}</p>
+      <p>Tags: {tags}</p>
       <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
         ← Back to Feed
       </a>
