@@ -1,11 +1,3 @@
-import { connectDB } from "@/app/lib/mongoose";
-
-export default async function Page() {
-  await connectDB();
-
-  return (
-    <div>
-      Tweet page
-    </div>
-  );
+export default function Page() {
+  return <h1>TEST</h1>;
 }
