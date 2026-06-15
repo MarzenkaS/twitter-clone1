@@ -24,14 +24,23 @@ export default async function TweetDetail({ params }) {
     );
   }
 
-  const likes = tweet.reactions?.likes ?? 0;
-  const dislikes = tweet.reactions?.dislikes ?? 0;
-  const tags = Array.isArray(tweet.tags) ? tweet.tags.join(", ") : "";
+  const likes = tweet.reactions?.likes ?? tweet.likes ?? 0;
+  const dislikes = tweet.reactions?.dislikes ?? tweet.dislikes ?? 0;
+  const tags = Array.isArray(tweet.tags)
+    ? tweet.tags.join(", ")
+    : Array.isArray(tweet.tagList)
+      ? tweet.tagList.join(", ")
+      : "";
+
+  const title =
+    tweet.title ?? tweet.name ?? tweet.heading ?? tweet.subject ?? "";
+  const body =
+    tweet.body ?? tweet.content ?? tweet.text ?? tweet.description ?? "";
 
   return (
     <main>
-      <h1>{tweet.title}</h1>
-      <p>{tweet.body}</p>
+      <h1>{title || "(no title)"}</h1>
+      {body ? <p>{body}</p> : null}
       <p>
         👍 {likes} | 👎 {dislikes}
       </p>
