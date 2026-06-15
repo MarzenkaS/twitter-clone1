@@ -36,7 +36,9 @@ export default async function TweetDetail({ params }) {
     tweet.title ?? tweet.name ?? tweet.heading ?? tweet.subject ?? "";
   const body =
     tweet.body ?? tweet.content ?? tweet.text ?? tweet.description ?? "";
+  const idParam = id;
   const showDebug = !title && !body;
+  const showParams = !idParam;
 
   return (
     <main>
@@ -57,6 +59,20 @@ export default async function TweetDetail({ params }) {
             }}
           >
             {JSON.stringify(tweet, null, 2)}
+          </pre>
+        </section>
+      )}
+      {showParams && (
+        <section style={{ marginTop: 16 }}>
+          <h2>Params (debug)</h2>
+          <pre
+            style={{
+              whiteSpace: "pre-wrap",
+              background: "#f7f7f7",
+              padding: 8,
+            }}
+          >
+            {JSON.stringify(params, null, 2)}
           </pre>
         </section>
       )}
