@@ -8,7 +8,21 @@ async function getTweet(id) {
 
 export default async function TweetDetail({ params }) {
   const { id } = params;
-  const tweet = await getTweet(id);
+  const tweetResp = await getTweet(id);
+  const tweet =
+    tweetResp?.post ??
+    (Array.isArray(tweetResp?.posts) ? tweetResp.posts[0] : tweetResp);
+
+  if (!tweet) {
+    return (
+      <main>
+        <h1>Tweet not found</h1>
+        <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
+          ← Back to Feed
+        </a>
+      </main>
+    );
+  }
 
   const likes = tweet.reactions?.likes ?? 0;
   const dislikes = tweet.reactions?.dislikes ?? 0;
@@ -21,7 +35,7 @@ export default async function TweetDetail({ params }) {
       <p>
         👍 {likes} | 👎 {dislikes}
       </p>
-      <p>Tags: {tags}</p>
+      {tags && <p>Tags: {tags}</p>}
       <a href="/" style={{ color: "blue", textDecoration: "underline" }}>
         ← Back to Feed
       </a>
